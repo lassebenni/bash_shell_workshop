@@ -1,4 +1,5 @@
 # Bash workshop
+
 By Lasse Benninga 26-03-2020
 
 Table of contents:
@@ -28,15 +29,15 @@ Table of contents:
 
   ####  Why should I care?
 
-  Bash is used in almost every facet of software development, from handling low level processes, automating simple jobs, creating complex networking operations, interacting with the filesystem on your computer, installing programs that install other programs that install other programs. The possibilities are endless. 
+Bash is used in almost every facet of software development, from handling low level processes, automating simple jobs, creating complex networking operations, interacting with the filesystem on your computer, installing programs that install other programs that install other programs. The possibilities are endless. 
 
- Most developers will encounter **bash** for the first time when they encounter Linux, where the command line is seen as far less scary than on Windows. For me, the first time I used bash was when I had to use a Linux laptop. Nowadays I use it as standard workflow for interacting with Docker, Linux machines and even my Windows machine. 
+Most developers will encounter **bash** for the first time when they encounter Linux, where the command line is seen as far less scary than on Windows. For me, the first time I used bash was when I had to use a Linux laptop. Nowadays I use it as standard workflow for interacting with Docker, Linux machines and even my Windows machine. 
 
-  It can do impressive things like find a certain word in all the files on your computer, change 1000 of lines across multiple files, control another computer over the internet (or on your network). You can use it to quickly compare files, create or remove them.
+It can do impressive things like find a certain word in all the files on your computer, change 1000 of lines across multiple files, control another computer over the internet (or on your network). You can use it to quickly compare files, create or remove them.
 
-  You can do a lot of these things on Windows with Powershell, but I  (and many others ) personally find that it not as user-friendly as bash.
+You can do a lot of these things on Windows with Powershell, but I  personally find that it not as user-friendly as bash.
 
-  I see Bash as the glue that can intuitively paste different programs together to do what you want. It's ideal for scripting, which a nice way to say "hacking stuff together without consideration". But just like other programming languages, it is used to power most of the internet as we know it.
+I see Bash as the glue that can intuitively paste different programs together to do what you want. It's ideal for scripting, which a nice way to say "hacking stuff together without consideration". But just like other programming languages, it is used to power most of the internet as we know it.
 
   
 
@@ -54,35 +55,49 @@ Table of contents:
 
 ---
 
-
   # Theory
+
+In order to fully understand bash you should understand (or at least be aware of) Unix, the Operating System it all began with. It is the history of the computer, it is the basis for the words you are reading right now and the twitter feed you are watching on your phone. 
+
+## The UNIX Operating System 
+
+Watch this video on the commercial promotion of the Unix system by its creators Dennis Ritchie (creator of the C programming language), Ken Thompson and Brian Kernighan. They are trying to sell the concept of an Operating System to the bewildered masses. 
+
+The beauty of this video is that many of these concepts (executing programs, connecting them) are still the same today 
+
+![image-20200326171749979](C:\Users\klm88213\AppData\Roaming\Typora\typora-user-images\image-20200326171749979.png).
+
+https://www.youtube.com/watch?v=tc4ROCJYbm0
+
+
+
+Now that you know what UNIX was and is, back to now. We are going to use the shell.
 
   ## What the shell?
 
   > Bash is an extremely popular terminal shell for a variety of *NIX and other systems. Unfortunately, its use and operation is often very unclear. Documentation, both commercial and on the web are often extremely lacking, confusing and misleading. ~ Maarten Billemont
 
-  So evidently bash is a "shell", whatever that means. And the documentation is a mess, perfect.
-
-  Bash is probably the most popular shell used in Linux distributions today.
+  So evidently bash is a "shell", whatever that means. And the documentation is a mess, *perfect*.
 
   > Bash is the shell, or command language interpreter, for the GNU operating system. The name is an acronym for the ‘Bourne-Again SHell’, a pun on Stephen Bourne, the author of the direct ancestor of the current Unix shell `sh`,s
 
-  Ok, so a shell is a command language interpreter? That still doesn't *really* tell me much. I understand a command, and a a language, but what is an interpreter?  Also, what the heck is a "GNU"? Cute about the name, he must've felt honored, unless he came up with it himself, then it's a bit tacky like naming your kid after yourself and adding "JR". GNU is the brainchild of crazed scientist Richard Stallman to create a fully free, free as in beer not free as in idea, Operating System based on UNIX but totally free source code. Neat huh. The idea was to create a own OS kernel based on UNIX, but when the Linux kernel showed up, it was deemed the chosen one. What is  a Kernel you ask? For a moment there, I thought you wouldn't!
+Ok, so a shell is a command language interpreter? That still doesn't *really* tell me much. I understand a command, and a a language, but what is an interpreter?  
+
+Also, what the heck is a "GNU"? Cute about the name, he must've felt honored, unless he came up with it himself, then it's a bit tacky like naming your kid after yourself and adding "JR". GNU is the brainchild of crazed scientist Richard Stallman to create a fully free, free as in beer not free as in idea, Operating System based on UNIX but totally free source code. Neat huh. The idea was to create a own OS kernel based on UNIX, but when the Linux kernel showed up, it was deemed the chosen one.
+
+ What is  a Kernel you ask? For a moment there, I thought you wouldn't!
 
   #### Kernel
 
- A kernel is the most central piece of software in the Operating System. The core, the big small one, the general, the kernel. It directs the rest of the system and should at least perform the following duties: talking to the hardware, controlling the software so it doesn't perform illegal actions. Everything is built around the kernel.
+ A kernel is the most central piece of software in the Operating System. The core, the big small one, the general, the kernel. It directs the rest of the system and should at least perform the following duties: talking to the hardware and controlling the software so it doesn't perform illegal actions. Everything is built around the kernel.
 
   
 
   #### But really, what the hell is a Kernel?
 
-  > "So back in the day, everybody who wanted to do anything with a computer had to start from scratch. [...] It was really annoying. Really. Annoying. And so error prone. 
-  >
-  > […] 
+  > "So back in the day, everybody who wanted to do anything with a computer had to start from scratch. It was really annoying. Really. Annoying. And so error prone. 
   >
   > So they started making "libraries of code". The libraries would have "include books" for the various things like operating the tape drives and the printers and so on.
-  > […]
   >
   > So things got better. But computers weren't all that fast. So it became obvious that even re-building all the drivers for each program was a waste of time. So they started to make "runtime libraries". Basically they'd compile the human-readable code into a machine readable format, then include that. It was much faster. But computer were *really* *really* slow. And it became obvious that "most of the program" you were "loading into memory" was from these libraries. […] 
   > So wouldn't it be cool if we could leave the common stuff in there and just load our unique parts? Basically what if we condensed the stuff we needed to operate the system hardware into one blob that would just always be there? But there were *way* more libraries than there was memory. Like one kilobyte of memory was a *huge* computer.
@@ -90,6 +105,10 @@ Table of contents:
   > So they paired down only the most common parts. This smallest common part was the "kernel" of the "operating system".
   >
   > So "the kernel" of an operating system is the minimum needed to run the various hardware, the minimum needed to get programs into and out of memory, and the minimum needed to let programs ask the kernel to operate the hardware for them (instead of needing the programs to operate the hardware themselves).
+  >
+  > @ *BitOBear*
+  >
+  > https://www.reddit.com/r/explainlikeimfive/comments/5u2nkx/eli5_what_is_a_linux_kernel/
 
   The kernel is one. One is the kernel.
 
@@ -98,24 +117,36 @@ Table of contents:
   #### Terminals
 
   > But terminals are not always physically connected to the machine. There may be some application that "emulates" terminal accepting keystrokes from user and sending them somewhere (xterm and ssh are good examples). There is an API in Kernel called **pseudo terminal** for that. So your **tty** may really be connected to some application instead of real terminal
+  >
+  > [Stackexchange post](https://unix.stackexchange.com/questions/4126/what-is-the-exact-difference-between-a-terminal-a-shell-a-tty-and-a-con) @[user996142](https://unix.stackexchange.com/users/161645/user996142)
+  >
+  > 
 
-  Terminals/consoles used to be the physical devices connected to the computer. UNIX-like systems could handle multiple terminal connections in parallel. Nowadays the terminals are almost only virtual: software programs installed on the computer to emulate the terminal and pass user input from the keyboard to the shell.
+ Terminals/consoles used to be the physical devices connected to the computer. UNIX-like systems could handle multiple terminal connections in parallel. Nowadays the terminals are almost only virtual: software programs installed on the computer to emulate the terminal and pass user input from the keyboard to the shell.
 
   
 
   #### TTY
 
-  >  'tty' is short for 'teletype', which was an actual physical device that had a printer that printed on paper combined with a keyboard. The model the the abstract 'tty' device presents to programs that are using it is basically that there is a teletype on the other end. You send it characters and those characters appear on the teletype. When you read characters from it, those characters represent keys that were typed on a keyboard. ~ Stackoverflow
+  >  'tty' is short for 'teletype', which was an actual physical device that had a printer that printed on paper combined with a keyboard. The model the the abstract 'tty' device presents to programs that are using it is basically that there is a teletype on the other end. You send it characters and those characters appear on the teletype. When you read characters from it, those characters represent keys that were typed on a keyboard. 
+  >
+  >  [Stackexchange post](https://unix.stackexchange.com/questions/4126/what-is-the-exact-difference-between-a-terminal-a-shell-a-tty-and-a-con) @[Omnifarious](https://unix.stackexchange.com/users/8068/omnifarious)
+  >
+  >  
 
   So the TTY is abstract concept for a device that connects to the computer and passes commands.
 
   > A TTY is essentially a pseudo device, call it a kernel resource, which is used by processes to access a specific terminals.
+  >
+  > [Stackexchange post](https://unix.stackexchange.com/questions/4126/what-is-the-exact-difference-between-a-terminal-a-shell-a-tty-and-a-con) @ [Johan](https://unix.stackexchange.com/users/27032/johan)
 
   TTYs are basically emulated nowadays, purely software.
 
   
 
   > In its most common meaning, **terminal** is synonymous with tty.
+  >
+  > [Stackexchange post](https://unix.stackexchange.com/questions/4126/what-is-the-exact-difference-between-a-terminal-a-shell-a-tty-and-a-con) @ [Gilles 'SO- stop being evil'](https://unix.stackexchange.com/users/885/gilles-so-stop-being-evil)
 
   So often used in conjunction with terminal.
 
@@ -128,6 +159,8 @@ Table of contents:
   > In essence, a shell program is one that provides users with an interface to interact with other programs. There is a large variety of shell programs, each with their own language. Some popular ones are the C shell (csh), Z shell (zsh), Korn shell (ksh), Bourne shell, Debian's Almquist shell (dash), etc. Bash (also called the Bourne Again shell) is currently the most popular and ubiquitously available shell. Even though all of these shells use seemingly similar syntax, it is important to be fully aware of what shell you're actually writing code for. Often, you'll hear people refer to their code as "shell code", which is about as specific as "source code" is when referring to your Java code. This guide will teach you how to write bash shell code: you should use it only with the bash shell, not any other.
   >
   > Bash uses a method directly counter to the ideas of graphical user interfaces: it runs in a text-only "console" where interaction is mainly limited to displaying characters on your screen and reading them from your keyboard. If you're not yet familiar in this kind of environment, it will feel exceptionally alien, primitive and limiting to you.
+  >
+  > https://guide.bash.academy/inception/
 
   So instead of using the mouse and fancy 256k graphics, we are going back to our roots. The jungle of computing if you will. Where doom lays around every corner (`sudo, not even once.`) but endless riches await in hidden temples (`find / -name "*treasure*"`).
 
@@ -143,11 +176,15 @@ Table of contents:
 
   #### The bourn again shell 
 
-  > When the GNU project was formed to create free equivalents of paid-for Unix programs, the shell the GNU developers chose to create was based on the Bourne shell. Because they wanted to (a) fix some of the bugs that were in the Bourne shell and (b) add extra features, they named it the Bourne Again Shell -- a mild pun -- and that name quickly became abbreviated to bash. ~ https://www.reddit.com/r/explainlikeimfive/comments/42ajiq/eli5what_is_gnu_bash/
+  > When the GNU project was formed to create free equivalents of paid-for Unix programs, the shell the GNU developers chose to create was based on the Bourne shell. Because they wanted to (a) fix some of the bugs that were in the Bourne shell and (b) add extra features, they named it the Bourne Again Shell -- a mild pun -- and that name quickly became abbreviated to bash. 
+  >
+  > https://www.reddit.com/r/explainlikeimfive/comments/42ajiq/eli5what_is_gnu_bash/
 
   So we know about GNU now. We know about the terminal. We know about the shell. Bash is a shell interacting with the kernel by using the terminal, it used to a physical device, called a console, but now its all virtual and run in terminal emulators, get it?
 
   > A [**shell**](http://en.wikipedia.org/wiki/Shell_(computing)) is the primary interface that users see when they log in, whose primary purpose is to start other programs. (I don't know whether the original metaphor is that the shell is the home environment for the user, or that the shell is what other programs are running in.)
+  >
+  > https://superuser.com/questions/795950/what-is-the-differences-of-these-conceptsshell-terminal-console-and-command-l/952203#952203
 
   The shell is the concert hall in which other programs play their music. It sits around the kernel to interact with the user, like a little machine in a box, which I am still convinced a computer, or someone's computer somewhere, is.
 
@@ -166,6 +203,8 @@ Table of contents:
   #### Metaphor for it all
 
   > A console is the telephone, a shell is the minion on the other end of the line that you command to do things, and the language they speak is the equivalent of what kind of shell they are (bash, ksh, powershell, etc). By way of example: If want your minion to give you a list of files, you would say "dir" to a Powershell speaker, and "ls" to a bash or ksh speaker. Like many languages that overlap, all three understand that "cd" means "change directory".
+  >
+  > https://www.reddit.com/r/cs50/comments/2zq8nj/can_someone_eli5_the_difference_between_console/ @[zyzzogeton](https://www.reddit.com/user/zyzzogeton/)
 
   So input = tty/terminal/console, orchestrator = shell, language = bash/sh/ksh/powershell/fish/myzsh.
 
@@ -262,15 +301,16 @@ Table of contents:
 >   Each time a program is started, the system creates a running process for it. Processes have plugs, called file descriptors which allow them to connect streams that lead to files, devices or other processes.
 
 ----
+
   # References
 
   
 
-  ### People 
+  ### Influential people 
 
-  Bill Joy - Author of the C shell and co-founder of Sun Microsystems. Author of VI text editor. Developer of BSD (Berkeley Software Distribution) OS based in UNIX. 
+Bill Joy - Author of the C shell and co-founder of Sun Microsystems. Author of VI text editor. Developer of BSD (Berkeley Software Distribution) OS based in UNIX. 
 
-  Stephen Bourne - Daddy of the Bourne shell, on which most shells are based. Creator of the `adb` UNIX debugger and master of UNIX.
+Stephen Bourne - Daddy of the Bourne shell, on which most shells are based. Creator of the `adb` UNIX debugger and master of UNIX.
 
   
 
@@ -342,6 +382,7 @@ Table of contents:
     $! is the PID of the most recent background command.
     $0 is the name of the shell or shell script.
     ```
+
 - Difference subshell and child process
 
   > A subshell environment is a separate shell execution environment created as a duplicate of the parent environment. That execution environment includes things like opened files, umask, working directory, shell variables/functions/aliases... Changes to that subshell environment do not affect the parent environment.
@@ -354,28 +395,36 @@ Table of contents:
 
   ### Popular programs
 
-  - sort
-  - cat
-  - read
-  - for-loop
-  - grep 
-  - sed
-  - if-then
-  - xargs
-  - top
-  - watch
-  - diff
-  - comm
-  - find
-  - source
-  - uniq
-  - man
-  - apropos
-  - awk
-  - cut
-  - less
-  - tree
-  - shuf 
+25 most used commands: https://www.educative.io/blog/bash-shell-command-cheat-sheet
+
+Programs often used:
+
+```bash
+- sort
+- cat
+- read
+- for-loop
+- grep 
+- sed
+- if-then
+- xargs
+- top
+- watch
+- diff
+- comm
+- find
+- source
+- uniq
+- man
+- apropos
+- awk
+- cut
+- less
+- tree
+- shuf 
+```
+
+
 
 ### Bash interactive games/tutorials
 
@@ -383,28 +432,60 @@ Table of contents:
 
   https://web.mit.edu/mprat/Public/web/Terminus/Web/main.html
 
+A interactive web-browser game with bash commands
+
+
+
   https://overthewire.org/wargames/bandit/bandit1.html
+
+Game where you "hack" into a remote computer using `ssh`, with detailed steps.
+
+
 
   https://github.com/veltman/clmystery/tree/master
 
+A murder mystery, where you, the detective, solve it by pure reasoning and bash skills.
+
+
+
   https://gitlab.com/slackermedia/bashcrawl
 
-  Guide:
+"Crawler" game where you traverse the world (directories) with bash.
+
+
+
+  Guides:
+
+  http://mywiki.wooledge.org/BashGuide
+
+Quintessential, most extensive and up to date guide for learning bash. Also has a insanely long FAQ
+for all kinds of problems.
+
+
 
   https://github.com/denysdovhan/bash-handbook
 
+Very extensive repository for learning bash.
+
+
+
   https://guide.bash.academy/
 
-  
+  Awesome, very extensive guide with practical and human-readable examples. Unfortunately seems to have been abandoned and only the first three chapters have been finished, still worth it.
+
+
 
   ### Sites to mention:
 
   https://tldr.ostera.io/
 
+Hands down, the best bash snippets/examples website I have found.
+
+
+
   https://linux.die.net/man/
 
-  http://mywiki.wooledge.org/BashGuide
+The `man` pages, online. Enough said.
 
-  https://guide.bash.academy/
 
-  https://www.youtube.com/watch?v=tc4ROCJYbm0 - AT&T Archives: The UNIX Operating System
+
