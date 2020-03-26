@@ -1,0 +1,7 @@
+#!/bin/bash
+set -ex
+
+
+#install the bash_kernel for jupyter
+python -m bash_kernel.install
+
