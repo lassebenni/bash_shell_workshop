@@ -1,0 +1,12 @@
+q1answer: First `cd house` to get into the directory. 
+q1answer: Use `ls` to look around the directory.
+q2answer: There are two items of cat food:
+q2answer: `mv $house/garage/broken-cupboard/main-drawer/cheap-cat-food  $house/garage/broken-cupboard/side-drawer/moldy-cat-food $house/livingroom/bowl`
+q3answer: `rm $house/livingroom/bowl/moldy-cat-food`
+q4answer: `name="Your name"`
+q5answer: `head -n4 $house/livingroom/table/newspaper`
+q6answer: Declare the variable "name" to be "1", `name=1`.
+q6answer: Then run the function with `start_vacuum_cleaner`.
+q7answer: `ls $house > areas`
+q8answer: For instance `ls other 2> error`
+q9answer: Possibly answer: `echo 1 >> file` then `echo 2 >> file`, then `echo 3 >> file`.

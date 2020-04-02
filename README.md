@@ -54,9 +54,74 @@ How to continue?
 
     The theory behind using a shell, a sprinkle of UNIX and a something ominous called "terminal".
 
-2. [Follow the tutorial in the jupyter notebook](bash_workshop.ipynb)
+2. Follow the [tutorials](tutorials): 
 
-    The notebook contains step-by-step examples for learning bash commands on the computer.
+- [Tutorial Part One](tutorial_part_one.ipynb)
+
+    The notebook contains the basics step-by-step examples for learning bash commands on the computer.
 
 ### Tip MyBinder
-You can use [MyBinder](https://mybinder.org) to run the notebook in the cloud and learn all the commands in the browser!
+You can use [MyBinder](https://mybinder.org) to run this repository in the cloud and learn all the commands in the browser by running the notebook (`ipynb` file)!
+
+
+## Learning by playing:
+
+>  https://web.mit.edu/mprat/Public/web/Terminus/Web/main.html
+>
+>A interactive web-browser game with bash commands
+---
+
+>https://overthewire.org/wargames/bandit/bandit1.html
+>
+>Game where you "hack" into a remote computer using `ssh`, with detailed steps.
+--- 
+>  https://github.com/veltman/clmystery/tree/master
+>
+>A murder mystery, where you, the detective, solve it by pure reasoning and bash skills.
+
+---
+>  https://gitlab.com/slackermedia/bashcrawl
+>
+>"Crawler" game where you traverse the world (directories) with bash.
+
+## Guides:
+
+>  http://mywiki.wooledge.org/BashGuide
+>
+> Quintessential, most extensive and up to date guide for learning bash. Also has a insanely long FAQ
+for all kinds of problems.
+
+
+--- 
+>  https://github.com/denysdovhan/bash-handbook
+> Very extensive repository for learning bash.
+--- 
+>  https://guide.bash.academy/
+>
+>  Awesome, very extensive guide with practical and human-readable examples. Unfortunately seems to have been abandoned and only the first three chapters have been finished, still worth it.
+---
+>  https://linuxconfig.org/bash-scripting-tutorial-for-beginners
+>
+>  Very compact guide with nice videos (using asciinema.org) covering the essentials.
+---
+> https://zachgoll.github.io/blog/2019/bash-essentials/
+>
+> Detailed and recent guide on often-used programs.
+
+## Sites to mention:
+
+>  https://tldr.ostera.io/
+>
+>Hands down, the best bash snippets/examples website I have found.
+---
+>https://linux.die.net/man/
+>
+>The `man` pages, online. Enough said.
+--- 
+> https://devhints.io/bash
+>
+> Detailed cheat sheet for bash
+---
+> https://gist.github.com/raineorshine/6927510
+>
+> Minimal cheat sheet/gist
