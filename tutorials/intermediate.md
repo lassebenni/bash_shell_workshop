@@ -31,23 +31,6 @@ Whenever a program needs to send its output to another programs input, or any pl
 
 No, the programs output stream is ephemeral, and is lost after processing by another program. Streams can be forwarded, not replayed.
 
-> Q: How do you write standard out to a file?
-
-`
-> Q: How do you write standard error to another file?
-
-
-
-- For-loops
-- If else
-- functions
-- builtins 
-
-
-- relative vs absolute path
-
-- practical exercises
-
 
 # What is a file really?
 > It may be useful to explain how files work at the lowest level:
